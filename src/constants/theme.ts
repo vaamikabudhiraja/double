@@ -63,3 +63,57 @@ export const Spacing = {
 
 export const BottomTabInset = Platform.select({ ios: 50, android: 80 }) ?? 0;
 export const MaxContentWidth = 800;
+
+/* -------------------------------------------------------------------------- */
+/* Tandem design tokens                                                        */
+/* Sourced verbatim from the `:root` variables in design/tandem-*.html so the  */
+/* app and the wireframes stay in lockstep. See CLAUDE.md → "Design reference".*/
+/* -------------------------------------------------------------------------- */
+
+export const Palette = {
+  bg: '#FFFBF4', // warm background
+  ink: '#1B1430',
+  inkSoft: 'rgba(27,20,48,0.60)',
+  line: 'rgba(27,20,48,0.10)',
+  card: '#FFFFFF',
+
+  coral: '#FF5A4D', // Tonight
+  emerald: '#12B886', // Groups
+  violet: '#7A5CFF', // Meet
+  blue: '#3B78E7', // You / verify
+  yellow: '#FFC23C',
+  pink: '#FF4D97',
+
+  coralTint: '#FFEDEB',
+  emeraldTint: '#E4F7F0',
+  violetTint: '#EFEBFF',
+  blueTint: '#E7F0FE',
+  yellowTint: '#FFF3D6',
+  pinkTint: '#FFE8F2',
+} as const;
+
+/** The four bottom-tab sections, each owning a colour (used when active). */
+export type SectionKey = 'tonight' | 'groups' | 'meet' | 'you';
+
+export const Section: Record<
+  SectionKey,
+  { label: string; color: string; tint: string }
+> = {
+  tonight: { label: 'Tonight', color: Palette.coral, tint: Palette.coralTint },
+  groups: { label: 'Groups', color: Palette.emerald, tint: Palette.emeraldTint },
+  meet: { label: 'Meet', color: Palette.violet, tint: Palette.violetTint },
+  you: { label: 'You', color: Palette.blue, tint: Palette.blueTint },
+};
+
+/**
+ * Font family keys map to the exact weights we load in app/_layout.tsx via
+ * expo-font. Bricolage Grotesque = display, Instrument Sans = body — matching
+ * the wireframes' `font-family` rules.
+ */
+export const FontFamily = {
+  display: 'BricolageGrotesque_800ExtraBold',
+  displayBold: 'BricolageGrotesque_700Bold',
+  body: 'InstrumentSans_400Regular',
+  bodyMedium: 'InstrumentSans_500Medium',
+  bodySemiBold: 'InstrumentSans_600SemiBold',
+} as const;
