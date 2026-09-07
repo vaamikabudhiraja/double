@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>tandem — creating a group</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FFFBF4;--ink:#1B1430;--ink-soft:rgba(27,20,48,0.60);--line:rgba(27,20,48,0.10);--card:#fff;
+    --coral:#FF5A4D;--emerald:#12B886;--violet:#7A5CFF;--blue:#3B78E7;--yellow:#FFC23C;--pink:#FF4D97;
+    --coral-t:#FFEDEB;--emerald-t:#E4F7F0;--violet-t:#EFEBFF;--blue-t:#E7F0FE;--yellow-t:#FFF3D6;--pink-t:#FFE8F2;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:'Instrument Sans',system-ui,sans-serif;font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1100px;margin:0 auto;padding:0 24px}
+  h1,h2,h3,h4{font-family:'Bricolage Grotesque',sans-serif;margin:0;line-height:1.05}
+  header{padding:60px 0 8px}
+  .mark{font-family:'Bricolage Grotesque';font-weight:800;font-size:20px;display:inline-flex;align-items:center;gap:9px}
+  .mark .dot{width:12px;height:12px;border-radius:50%;background:conic-gradient(var(--coral),var(--yellow),var(--emerald),var(--violet),var(--coral))}
+  header h1{font-weight:800;font-size:clamp(32px,5vw,50px);letter-spacing:-0.03em;margin:20px 0 0;max-width:16ch}
+  header p{color:var(--ink-soft);max-width:56ch;font-size:19px;margin:16px 0 0}
+
+  .gallery{display:flex;flex-wrap:wrap;gap:40px 26px;justify-content:center;margin:46px 0 20px}
+  .phone{width:280px;flex:0 0 auto}
+  .screen{background:var(--card);border-radius:34px;overflow:hidden;position:relative;border:1px solid var(--line);
+    box-shadow:0 26px 60px -20px rgba(27,20,48,.35);min-height:576px;display:flex;flex-direction:column;font-size:13px}
+  .topbar{padding:16px 15px 15px;color:#fff;background:var(--emerald)}
+  .topbar .step{font-size:11px;font-weight:600;opacity:.9}
+  .topbar h4{font-weight:800;font-size:23px;letter-spacing:-0.02em;margin:3px 0 0}
+  .prog{display:flex;gap:5px;margin-top:12px}
+  .prog i{height:4px;border-radius:100px;background:rgba(255,255,255,.35);flex:1}
+  .prog i.on{background:#fff}
+  .body{padding:16px 15px;flex:1;display:flex;flex-direction:column}
+  .lab{font-size:12px;font-weight:700;margin:14px 0 7px}
+  .lab:first-child{margin-top:0}
+  .field{border:1.5px solid var(--line);border-radius:12px;padding:12px 13px;font-size:13px;color:var(--ink)}
+  .field.ph{color:var(--ink-soft)}
+  .chips{display:flex;flex-wrap:wrap;gap:7px}
+  .chip{font-size:12px;font-weight:700;border-radius:100px;padding:8px 13px;border:1.5px solid var(--line);color:var(--ink-soft);display:inline-flex;gap:6px;align-items:center}
+  .chip.on{border-color:var(--emerald);background:var(--emerald-t);color:#0b6b4f}
+  .seg{display:flex;gap:6px;background:#F5F2EB;border-radius:12px;padding:4px}
+  .seg span{flex:1;text-align:center;font-size:12px;font-weight:700;padding:8px 4px;border-radius:9px;color:var(--ink-soft)}
+  .seg span.on{background:#fff;color:var(--ink);box-shadow:0 1px 3px rgba(27,20,48,.12)}
+  .who{border:1.5px solid var(--line);border-radius:12px;padding:11px 13px;display:flex;align-items:center;gap:10px;margin-top:8px}
+  .who.on{border-color:var(--blue);background:var(--blue-t)}
+  .who .t{font-weight:700;font-size:13px}
+  .who .s{font-size:11px;color:var(--ink-soft)}
+  .who .flag{margin-left:auto;font-size:10px;font-weight:700;color:var(--blue);background:#fff;border:1px solid var(--blue);border-radius:100px;padding:3px 8px}
+  .note{display:flex;gap:9px;background:var(--blue-t);border-radius:12px;padding:11px 12px;margin-top:12px}
+  .note .i{color:var(--blue);font-weight:800}
+  .note p{font-size:11.5px;color:#26508f;margin:0;line-height:1.4}
+  .cta{color:#fff;font-weight:700;text-align:center;border-radius:14px;padding:13px;font-size:14px;margin-top:auto;background:var(--emerald)}
+  .cta.ghost{background:transparent;border:1.5px solid var(--line);color:var(--ink-soft);margin-top:10px}
+  .scap{font-family:'Bricolage Grotesque';font-weight:700;text-align:center;color:var(--ink-soft);font-size:12.5px;margin-top:14px}
+
+  /* success screen */
+  .win{background:linear-gradient(135deg,var(--emerald),#0E9E76);color:#fff;padding:26px 16px 20px;text-align:center}
+  .win .tick{width:56px;height:56px;border-radius:50%;background:rgba(255,255,255,.22);display:flex;align-items:center;justify-content:center;font-size:28px;margin:0 auto 12px}
+  .win h4{font-weight:800;font-size:22px;letter-spacing:-0.01em}
+  .win .host{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;background:rgba(255,255,255,.22);padding:4px 11px;border-radius:100px;margin-top:9px}
+  .suggest{background:var(--yellow-t);border-radius:14px;padding:14px;text-align:center;margin-top:2px}
+  .suggest .n{font-family:'Bricolage Grotesque';font-weight:800;font-size:30px;color:#a56a00}
+  .suggest .s{font-size:12px;color:#7a5500;font-weight:600}
+  .invrow{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--line)}
+  .invrow:last-child{border:0}
+  .invrow .a{width:30px;height:30px;border-radius:50%;color:#fff;font-weight:800;font-size:12px;display:flex;align-items:center;justify-content:center}
+  .invrow .nm{font-weight:700;font-size:13px}.invrow .mt{font-size:11px;color:var(--ink-soft)}
+  .invrow .add{margin-left:auto;font-size:11px;font-weight:700;color:var(--emerald)}
+
+  footer{padding:30px 0 64px;color:var(--ink-soft);font-size:14px;border-top:1px solid var(--line);margin-top:20px}
+  @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="mark"><span class="dot"></span>tandem</div>
+    <h1>Anyone can start a group. It takes three taps.</h1>
+    <p>A few questions — the ones discovery actually needs — and the group goes live with people already suggested to it. Answer "who's it for" and the lock sets itself.</p>
+  </div>
+</header>
+
+<div class="wrap gallery">
+
+  <!-- STEP 1 -->
+  <div class="phone"><div class="screen">
+    <div class="topbar"><div class="step">Start a group</div><h4>What's it about?</h4>
+      <div class="prog"><i class="on"></i><i></i><i></i></div></div>
+    <div class="body">
+      <div class="lab">Name it</div>
+      <div class="field">Howth &amp; Wicklow hikes</div>
+      <div class="lab">Category</div>
+      <div class="chips">
+        <span class="chip on">🥾 Outdoors</span><span class="chip">🍷 Wine</span><span class="chip">🎲 Games</span>
+        <span class="chip">🎧 Music</span><span class="chip">🏃 Fitness</span><span class="chip">🍳 Food</span>
+      </div>
+      <div class="lab">One line</div>
+      <div class="field ph">Easy Sunday hikes, coffee after. All paces welcome.</div>
+      <div class="cta">Next</div>
+    </div>
+  </div><div class="scap">1 · The basics</div></div>
+
+  <!-- STEP 2 -->
+  <div class="phone"><div class="screen">
+    <div class="topbar"><div class="step">Start a group</div><h4>A few questions</h4>
+      <div class="prog"><i class="on"></i><i class="on"></i><i></i></div></div>
+    <div class="body">
+      <div class="lab">Where &amp; how far</div>
+      <div class="chips"><span class="chip">City centre</span><span class="chip on">Southside</span><span class="chip">Anywhere in Dublin</span></div>
+      <div class="lab">How often</div>
+      <div class="seg"><span>One-off</span><span class="on">Weekly</span><span>Monthly</span></div>
+      <div class="lab">Vibe</div>
+      <div class="seg"><span class="on">Chill</span><span>Balanced</span><span>Serious</span></div>
+      <div class="lab">Who can join</div>
+      <div class="who on"><div><div class="t">Everyone</div><div class="s">Open — no verification</div></div></div>
+      <div class="who"><div><div class="t">Students only</div><div class="s">UCD / Trinity / TU Dublin</div></div><span class="flag">needs verify</span></div>
+      <div class="cta">Create group</div>
+    </div>
+  </div><div class="scap">2 · Answers that set discovery + the lock</div></div>
+
+  <!-- STEP 3 -->
+  <div class="phone"><div class="screen">
+    <div class="win"><div class="tick">✓</div><h4>Howth &amp; Wicklow hikes is live</h4>
+      <div class="host">🛡️ You're the host · ID verified</div></div>
+    <div class="body">
+      <div class="suggest"><div class="n">40+</div><div class="s">people nearby into the outdoors — we'll suggest it to them</div></div>
+      <div class="lab" style="margin-top:16px">Invite your first few</div>
+      <div class="invrow"><span class="a" style="background:var(--coral)">S</span><div><div class="nm">Saoirse</div><div class="mt">Southside · hikes</div></div><span class="add">+ Invite</span></div>
+      <div class="invrow"><span class="a" style="background:var(--violet)">D</span><div><div class="nm">Diarmuid</div><div class="mt">new to Dublin</div></div><span class="add">+ Invite</span></div>
+      <div class="cta">Set your first hike</div>
+      <div class="cta ghost">Skip for now</div>
+    </div>
+  </div><div class="scap">3 · Born with momentum, not empty</div></div>
+
+</div>
+
+<footer><div class="wrap">Group-creation flow · hosting requires ID verification · the "who can join" answer sets any lock automatically.</div></footer>
+</body>
+</html>

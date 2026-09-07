@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>tandem — colourful concept & wireframes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FFFBF4;
+    --ink:#1B1430;
+    --ink-soft:rgba(27,20,48,0.60);
+    --line:rgba(27,20,48,0.10);
+    --card:#FFFFFF;
+
+    --coral:#FF5A4D;   /* Tonight / gigs */
+    --emerald:#12B886; /* Groups */
+    --violet:#7A5CFF;  /* Meet */
+    --blue:#3B78E7;    /* You / student verify */
+    --yellow:#FFC23C;  /* newcomer / highlight */
+    --pink:#FF4D97;    /* accent */
+
+    --coral-t:#FFEDEB;
+    --emerald-t:#E4F7F0;
+    --violet-t:#EFEBFF;
+    --blue-t:#E7F0FE;
+    --yellow-t:#FFF3D6;
+    --pink-t:#FFE8F2;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:'Instrument Sans',system-ui,sans-serif;font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:860px;margin:0 auto;padding:0 24px}
+  h1,h2,h3{font-family:'Bricolage Grotesque',sans-serif;line-height:1.03;margin:0}
+
+  /* ---------------- HERO ---------------- */
+  .hero{padding:70px 0 40px}
+  .mark{font-family:'Bricolage Grotesque';font-weight:800;font-size:22px;letter-spacing:-0.02em;display:inline-flex;align-items:center;gap:9px}
+  .mark .dot{width:13px;height:13px;border-radius:50%;
+    background:conic-gradient(var(--coral),var(--yellow),var(--emerald),var(--violet),var(--coral))}
+  .hero h1{font-weight:800;font-size:clamp(44px,8vw,80px);letter-spacing:-0.035em;margin:26px 0 0;max-width:13ch}
+  .lede{font-size:clamp(19px,2.5vw,23px);color:var(--ink-soft);max-width:36ch;margin:20px 0 0}
+  .cats{display:flex;flex-wrap:wrap;gap:10px;margin-top:30px}
+  .cat{font-family:'Bricolage Grotesque';font-weight:700;font-size:15px;border-radius:100px;padding:9px 17px;color:#fff}
+  .cat.c1{background:var(--coral)} .cat.c2{background:var(--emerald)} .cat.c3{background:var(--violet)}
+  .cat.c4{background:var(--blue)} .cat.c5{background:var(--pink)}
+  .cat.c6{background:var(--yellow);color:#5a3d00}
+
+  /* ---------------- SECTIONS ---------------- */
+  section{padding:46px 0;border-top:1px solid var(--line)}
+  .eyebrow{font-weight:700;font-size:14px;margin:0 0 12px}
+  .eyebrow.coral{color:var(--coral)} .eyebrow.emerald{color:var(--emerald)}
+  .eyebrow.violet{color:var(--violet)} .eyebrow.blue{color:var(--blue)} .eyebrow.pink{color:var(--pink)}
+  section h2{font-weight:700;font-size:clamp(28px,4vw,40px);letter-spacing:-0.02em;margin-bottom:16px;max-width:22ch}
+  section p{max-width:66ch;color:var(--ink);opacity:.9;margin:0 0 16px}
+  section p.sub{color:var(--ink-soft);opacity:1}
+
+  .engines{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:12px}
+  .engine{border-radius:20px;padding:22px;color:#fff}
+  .engine.e1{background:var(--coral)} .engine.e2{background:var(--emerald)} .engine.e3{background:var(--violet)}
+  .engine .role{font-family:'Bricolage Grotesque';font-weight:700;font-size:14px;opacity:.85}
+  .engine h3{font-weight:800;font-size:22px;margin:6px 0 8px}
+  .engine p{font-size:14.5px;opacity:.95;margin:0;max-width:none}
+
+  .facts{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:6px}
+  .fact{border-radius:18px;padding:20px;background:var(--card);border:1px solid var(--line)}
+  .fact .num{font-family:'Bricolage Grotesque';font-weight:800;font-size:38px;letter-spacing:-0.02em;line-height:1}
+  .fact.f1 .num{color:var(--coral)} .fact.f2 .num{color:var(--emerald)} .fact.f3 .num{color:var(--violet)}
+  .fact .lab{font-size:14px;color:var(--ink-soft);margin-top:8px}
+
+  .badgerow{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
+  .vb{display:inline-flex;align-items:center;gap:7px;border-radius:12px;padding:10px 14px;font-weight:600;font-size:14px}
+  .vb .tick{width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:800}
+  .vb.blue{background:var(--blue-t);color:#26508f} .vb.blue .tick{background:var(--blue)}
+  .vb.yellow{background:var(--yellow-t);color:#7a5500} .vb.yellow .tick{background:var(--yellow);color:#5a3d00}
+  .vb.emerald{background:var(--emerald-t);color:#0b6b4f} .vb.emerald .tick{background:var(--emerald)}
+  .vb.grey{background:#F0EDE6;color:var(--ink-soft)} .vb.grey .tick{background:var(--ink-soft)}
+
+  /* ---------------- WIREFRAMES ---------------- */
+  .frames{border-top:1px solid var(--line);padding:48px 0 20px}
+  .gallery{display:flex;flex-wrap:wrap;gap:40px 26px;justify-content:center;margin-top:30px}
+  .phone{width:274px;flex:0 0 auto}
+  .screen{background:var(--card);border-radius:34px;padding:0;overflow:hidden;position:relative;
+    box-shadow:0 26px 60px -20px rgba(27,20,48,.35);border:1px solid var(--line);
+    min-height:566px;display:flex;flex-direction:column;color:var(--ink);font-size:13px}
+  .body{padding:16px 15px 0;flex:1;display:flex;flex-direction:column;overflow:hidden}
+  .scap{font-family:'Bricolage Grotesque';font-weight:700;text-align:center;color:var(--ink-soft);font-size:12.5px;margin-top:14px}
+
+  /* colored top bar per section */
+  .topbar{padding:16px 15px 14px;color:#fff}
+  .topbar.coral{background:var(--coral)} .topbar.emerald{background:var(--emerald)}
+  .topbar.violet{background:var(--violet)} .topbar.blue{background:var(--blue)}
+  .topbar .kick{font-size:12px;font-weight:600;opacity:.9}
+  .topbar h4{font-family:'Bricolage Grotesque';font-weight:800;font-size:24px;letter-spacing:-0.02em;margin:3px 0 0}
+  .topbar .row{display:flex;justify-content:space-between;align-items:center}
+
+  .p-mark{font-family:'Bricolage Grotesque';font-weight:800;font-size:16px;display:flex;align-items:center;gap:6px}
+  .p-mark .d{width:9px;height:9px;border-radius:50%;background:conic-gradient(var(--coral),var(--yellow),var(--emerald),var(--violet),var(--coral))}
+  .p-h{font-family:'Bricolage Grotesque';font-weight:800;font-size:23px;letter-spacing:-0.02em;line-height:1.06;margin:12px 0 6px}
+  .p-sub{font-size:12.5px;color:var(--ink-soft);line-height:1.45}
+
+  .opt{border:1.5px solid var(--line);border-radius:15px;padding:13px 14px;margin-top:11px;display:flex;align-items:center;gap:12px}
+  .opt .em{width:34px;height:34px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:17px;flex:0 0 auto}
+  .opt .t{font-weight:700;font-size:13.5px} .opt .s{font-size:11.5px;color:var(--ink-soft)}
+  .opt.on{border-color:var(--coral);background:var(--coral-t)}
+
+  .cta{color:#fff;font-weight:700;text-align:center;border-radius:14px;padding:13px;font-size:14px;margin:14px 0}
+  .cta.coral{background:var(--coral)} .cta.emerald{background:var(--emerald)}
+  .cta.violet{background:var(--violet)} .cta.blue{background:var(--blue)}
+  .cta.ghost{background:transparent;border:1.5px solid var(--line);color:var(--ink-soft);font-weight:600}
+
+  .field{border:1.5px solid var(--line);border-radius:12px;padding:12px 13px;font-size:12.5px;color:var(--ink-soft);background:#fff;margin-top:11px}
+  .field b{color:var(--ink)}
+
+  /* gig card */
+  .gig{border-radius:16px;padding:13px;margin-top:11px;background:#fff;border:1px solid var(--line)}
+  .gig.hot{border-color:transparent;background:var(--coral-t)}
+  .gig .n{font-family:'Bricolage Grotesque';font-weight:800;font-size:15px;letter-spacing:-0.01em}
+  .gig .v{font-size:11.5px;color:var(--ink-soft);margin-top:1px}
+  .avstack{display:flex;align-items:center;margin-top:10px}
+  .av{width:24px;height:24px;border-radius:50%;margin-left:-7px;border:2px solid #fff;display:flex;align-items:center;justify-content:center;font-size:9.5px;font-weight:800;color:#fff}
+  .av:first-child{margin-left:0}
+  .av.a{background:var(--coral)} .av.b{background:var(--violet)} .av.c{background:var(--emerald)} .av.d{background:var(--yellow);color:#5a3d00} .av.e{background:var(--blue)}
+  .meetline{font-size:11px;font-weight:600;color:var(--coral);margin-left:9px}
+
+  .pin{display:flex;gap:11px;align-items:center;background:var(--yellow-t);border-radius:15px;padding:12px;margin-top:12px}
+  .pin .ic{width:30px;height:30px;border-radius:10px;background:var(--yellow);color:#5a3d00;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px}
+  .pin .t{font-weight:700;font-size:12.5px} .pin .s{font-size:11px;color:var(--ink-soft)}
+
+  .prow{display:flex;gap:10px;align-items:center;padding:9px 0}
+  .prow .pa{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:12px;color:#fff;flex:0 0 auto}
+  .prow .pn{font-weight:700;font-size:13px}
+  .prow .pm{font-size:11px;color:var(--ink-soft);display:flex;align-items:center;gap:5px;margin-top:1px}
+  .tickpill{display:inline-flex;align-items:center;gap:3px;font-size:10px;font-weight:700;border-radius:100px;padding:2px 7px}
+  .tickpill.blue{background:var(--blue-t);color:#26508f} .tickpill.emerald{background:var(--emerald-t);color:#0b6b4f} .tickpill.yellow{background:var(--yellow-t);color:#7a5500}
+
+  /* group rows */
+  .grp{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid var(--line)}
+  .grp:last-child{border-bottom:0}
+  .grp .gi{width:38px;height:38px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:18px;flex:0 0 auto}
+  .grp .gn{font-weight:700;font-size:13.5px} .grp .gs{font-size:11px;color:var(--ink-soft)}
+  .grp .lock{margin-left:auto;font-size:10px;font-weight:700;color:var(--blue);background:var(--blue-t);padding:4px 9px;border-radius:100px}
+  .grp .open{margin-left:auto;font-size:10px;font-weight:700;color:var(--emerald);background:var(--emerald-t);padding:4px 9px;border-radius:100px}
+
+  /* meet cards */
+  .meetcard{border-radius:18px;padding:16px;margin-top:12px;color:#fff}
+  .meetcard.d{background:var(--violet)} .meetcard.c{background:var(--pink)}
+  .meetcard h5{font-family:'Bricolage Grotesque';font-weight:800;font-size:17px;margin:0 0 4px}
+  .meetcard p{font-size:12px;margin:0;opacity:.95;max-width:none}
+
+  /* verify sheet */
+  .sheetscreen{background:var(--emerald);position:relative}
+  .dim{position:absolute;inset:0;background:rgba(27,20,48,.45)}
+  .sheet{position:absolute;left:0;right:0;bottom:0;background:#fff;border-radius:26px 26px 0 0;padding:22px 18px 20px;z-index:2}
+  .sheet .grab{width:40px;height:4px;border-radius:100px;background:var(--line);margin:0 auto 16px}
+  .sheet .lg{width:52px;height:52px;border-radius:16px;background:var(--blue-t);color:var(--blue);display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:12px}
+  .sheet h4{font-family:'Bricolage Grotesque';font-weight:800;font-size:20px;letter-spacing:-0.01em;margin:0 0 6px}
+  .sheet p{font-size:12.5px;color:var(--ink-soft);margin:0}
+
+  /* profile */
+  .profhero{padding:20px 15px 16px;background:linear-gradient(135deg,var(--violet),var(--pink));color:#fff}
+  .profhero .big{width:60px;height:60px;border-radius:20px;background:rgba(255,255,255,.22);display:flex;align-items:center;justify-content:center;font-family:'Bricolage Grotesque';font-weight:800;font-size:26px}
+  .profhero h4{font-family:'Bricolage Grotesque';font-weight:800;font-size:22px;margin:12px 0 2px}
+  .profhero .loc{font-size:12px;opacity:.9}
+  .pbadges{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}
+  .pb{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;border-radius:100px;padding:5px 10px}
+  .pb .t{width:14px;height:14px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;color:#fff}
+  .pb.blue{background:var(--blue-t);color:#26508f} .pb.blue .t{background:var(--blue)}
+  .pb.yellow{background:var(--yellow-t);color:#7a5500} .pb.yellow .t{background:var(--yellow);color:#5a3d00}
+  .pb.emerald{background:var(--emerald-t);color:#0b6b4f} .pb.emerald .t{background:var(--emerald)}
+  .rel{border:1px solid var(--line);border-radius:15px;padding:14px;margin-top:14px}
+  .rel .bar{height:8px;border-radius:100px;background:#F0EDE6;margin-top:9px;overflow:hidden}
+  .rel .bar i{display:block;height:100%;width:90%;background:var(--emerald);border-radius:100px}
+  .pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+  .pill{font-size:11px;font-weight:700;border-radius:100px;padding:5px 11px}
+  .pill.c{background:var(--coral-t);color:#b53228} .pill.e{background:var(--emerald-t);color:#0b6b4f} .pill.v{background:var(--violet-t);color:#4a34b0}
+
+  /* -------- bottom nav -------- */
+  .nav{display:flex;border-top:1px solid var(--line);background:#fff;padding:9px 6px 12px;margin-top:auto}
+  .nav a{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;color:var(--ink-soft);font-size:10px;font-weight:600;text-decoration:none}
+  .nav svg{width:22px;height:22px}
+  .nav .on.tTonight{color:var(--coral)} .nav .on.tGroups{color:var(--emerald)}
+  .nav .on.tMeet{color:var(--violet)} .nav .on.tYou{color:var(--blue)}
+
+  /* -------- roadmap -------- */
+  .steps{margin-top:8px}
+  .step{display:grid;grid-template-columns:46px 1fr;gap:16px;padding:18px 0;border-bottom:1px solid var(--line);align-items:start}
+  .step:last-child{border-bottom:0}
+  .step .sn{font-family:'Bricolage Grotesque';font-weight:800;font-size:28px;line-height:1}
+  .step:nth-child(1) .sn{color:var(--coral)} .step:nth-child(2) .sn{color:var(--emerald)}
+  .step:nth-child(3) .sn{color:var(--violet)} .step:nth-child(4) .sn{color:var(--blue)}
+  .step h3{font-weight:800;font-size:18px;margin:0 0 5px} .step p{font-size:14.5px;opacity:.85;margin:0}
+
+  .names{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
+  .name{font-family:'Bricolage Grotesque';font-weight:700;font-size:17px;padding:9px 16px;border-radius:100px;border:1px solid var(--line)}
+  .name.pick{background:var(--ink);color:#fff;border-color:var(--ink)}
+
+  footer{padding:40px 0 68px;border-top:1px solid var(--line);color:var(--ink-soft);font-size:13.5px}
+
+  @media(max-width:720px){.engines,.facts{grid-template-columns:1fr}}
+  @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="mark"><span class="dot"></span>tandem</div>
+    <h1>Your people are already out tonight.</h1>
+    <p class="lede">Meet them through the gigs, groups and nights you're going to anyway. Open to everyone in Dublin.</p>
+    <div class="cats">
+      <span class="cat c1">Gigs</span>
+      <span class="cat c2">Hikes</span>
+      <span class="cat c3">Doubles</span>
+      <span class="cat c6">New in Dublin</span>
+      <span class="cat c5">Wine</span>
+      <span class="cat c4">Freshers</span>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow coral">The insight</p>
+    <h2>The calendar creates the loneliness. We meet it there.</h2>
+    <p>Every social app fights an empty room. Kindred doesn't, because the city seeds it for us. Each September and February, thousands land in Dublin at once — new students, new arrivals for work — all not knowing anyone, all in the same short window of openness.</p>
+    <p class="sub">That's the rarest thing in social products: people who are lonely, motivated and available at the same moment. We show up exactly when it peaks.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow violet">How it fits together</p>
+    <h2>Three engines, one funnel</h2>
+    <p class="sub">Arrive not knowing anyone → find your first real thing to do → settle into a group you'll keep seeing.</p>
+    <div class="engines">
+      <div class="engine e1"><div class="role">Acquisition</div><h3>Cohort groups</h3><p>Uni intakes and newcomers. Timed floods of people who are all new together.</p></div>
+      <div class="engine e2"><div class="role">Activation</div><h3>Event rooms</h3><p>A concrete first thing to do. Someone's already going to that gig — don't go alone.</p></div>
+      <div class="engine e3"><div class="role">Retention</div><h3>Interest groups</h3><p>Hikes, wine, board games, doubles. Where people go once they're no longer new.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow emerald">Why Dublin wins</p>
+    <h2>Small city, huge scene</h2>
+    <p class="sub">"People at the same gig" and "people who can meet for a pint first" are the same set — because the venues sit on top of each other.</p>
+    <div class="facts">
+      <div class="fact f1"><div class="num">700+</div><div class="lab">concerts listed in Dublin for 2026</div></div>
+      <div class="fact f2"><div class="num">5 min</div><div class="lab">between Whelan's, the Academy & Vicar Street on foot</div></div>
+      <div class="fact f3"><div class="num">2×/yr</div><div class="lab">intake waves refill the funnel</div></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow blue">Open app, per-group doorkeepers</p>
+    <h2>You don't verify to get in. You verify to join specific groups.</h2>
+    <p>Anyone in Dublin can join Kindred and use the gigs, interest groups and newcomer stuff freely. Verification only appears the moment you tap into a group that needs it — you prove you're a UCD student <em>to enter the UCD group</em>, and nowhere else. Same check, but it feels earned instead of interrogating.</p>
+    <p class="sub" style="margin-bottom:20px">So a badge is something you carry <em>per group</em>, and a profile can hold several — each proving the one thing that group cares about:</p>
+    <div class="badgerow">
+      <span class="vb blue"><span class="tick">✓</span> UCD student</span>
+      <span class="vb blue"><span class="tick">✓</span> Trinity student</span>
+      <span class="vb yellow"><span class="tick">✓</span> New to Dublin</span>
+      <span class="vb emerald"><span class="tick">✓</span> ID verified (safety)</span>
+      <span class="vb grey"><span class="tick">✓</span> open group — no check</span>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== WIREFRAMES ==================== -->
+<div class="frames">
+  <div class="wrap">
+    <p class="eyebrow pink">What it could look like</p>
+    <h2 style="font-family:'Bricolage Grotesque';font-weight:700;font-size:clamp(28px,4vw,40px);letter-spacing:-0.02em">Wireframes</h2>
+    <p class="sub">Colour is the map: <b style="color:var(--coral)">coral</b> is Tonight, <b style="color:var(--emerald)">green</b> is Groups, <b style="color:var(--violet)">violet</b> is Meet, <b style="color:var(--blue)">blue</b> is You. The bar along the bottom takes you between them.</p>
+  </div>
+
+  <div class="wrap gallery" style="max-width:1200px">
+
+    <!-- 1. OPEN WELCOME -->
+    <div class="phone"><div class="screen">
+      <div class="body">
+        <div class="p-mark"><span class="d"></span>tandem</div>
+        <div class="p-h">What are you here for?</div>
+        <div class="p-sub">Pick a few. Nothing's locked — you can do it all.</div>
+        <div class="opt on"><span class="em" style="background:var(--coral-t)">🎧</span><div><div class="t">Gigs & nights out</div><div class="s">Find someone to go with</div></div></div>
+        <div class="opt"><span class="em" style="background:var(--emerald-t)">🥾</span><div><div class="t">Groups & hobbies</div><div class="s">Hikes, wine, board games</div></div></div>
+        <div class="opt"><span class="em" style="background:var(--yellow-t)">✈️</span><div><div class="t">I'm new to Dublin</div><div class="s">Meet others just landed</div></div></div>
+        <div class="cta coral">Come on in</div>
+      </div>
+    </div><div class="scap">1 · Open door — no gate</div></div>
+
+    <!-- 2. TONIGHT -->
+    <div class="phone"><div class="screen">
+      <div class="topbar coral">
+        <div class="row"><div class="p-mark" style="color:#fff"><span class="d"></span>tandem</div><span style="font-size:11px;font-weight:600;background:rgba(255,255,255,.22);padding:4px 10px;border-radius:100px">Dublin 2</span></div>
+        <div class="kick" style="margin-top:8px">Fri 12 Sept</div>
+        <h4>Tonight</h4>
+      </div>
+      <div class="body">
+        <div class="gig hot">
+          <div class="n">Sprints</div><div class="v">Whelan's · 8:00pm</div>
+          <div class="avstack"><span class="av a">A</span><span class="av b">M</span><span class="av c">J</span><span class="av d">+</span><span class="meetline">14 going you could meet</span></div>
+        </div>
+        <div class="gig">
+          <div class="n">The Mary Wallopers</div><div class="v">Vicar Street · 7:30pm</div>
+          <div class="avstack"><span class="av e">R</span><span class="av a">K</span><span class="meetline" style="color:var(--ink-soft)">6 from your groups</span></div>
+        </div>
+        <div class="cta ghost" style="margin-top:12px">+ Add a ticket you already have</div>
+      </div>
+      <nav class="nav">
+        <a class="on tTonight"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>Tonight</a>
+        <a><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="9" r="3"/><circle cx="16" cy="11" r="2.4"/><path d="M4 20c0-3 2.5-5 5-5s5 2 5 5M14 20c0-2.2 1.5-3.6 3.5-3.6S21 18 21 20"/></svg>Groups</a>
+        <a><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5l1.8 3.7L18 9.3l-3 2.9.7 4.1L12 14.5 8.3 16.3 9 12.2l-3-2.9 4.2-.6z"/></svg>Meet</a>
+        <a><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.5-6 8-6s8 2 8 6"/></svg>You</a>
+      </nav>
+    </div><div class="scap">2 · Tonight — the gig feed</div></div>
+
+    <!-- 3. EVENT ROOM -->
+    <div class="phone"><div class="screen">
+      <div class="topbar coral">
+        <div class="kick">‹ Whelan's · Fri 8pm</div>
+        <h4>Sprints</h4>
+        <span style="display:inline-block;margin-top:8px;font-size:11px;font-weight:700;background:rgba(255,255,255,.22);padding:5px 11px;border-radius:100px">You + 13 others going</span>
+      </div>
+      <div class="body">
+        <div class="pin"><div class="ic">◎</div><div><div class="t">Pre-gig pint · The Lower Deck</div><div class="s">7:00pm · 5 going · 4 min walk</div></div></div>
+        <div style="margin-top:12px">
+          <div class="prow"><div class="pa" style="background:var(--violet)">M</div><div><div class="pn">Méabh, 20</div><div class="pm"><span class="tickpill blue">✓ UCD</span> reliable</div></div></div>
+          <div class="prow"><div class="pa" style="background:var(--yellow);color:#5a3d00">J</div><div><div class="pn">Jack, 22</div><div class="pm"><span class="tickpill yellow">✓ new here</span></div></div></div>
+          <div class="prow"><div class="pa" style="background:var(--emerald)">R</div><div><div class="pn">Róisín, 21</div><div class="pm"><span class="tickpill emerald">✓ ID</span> reliable</div></div></div>
+        </div>
+        <div class="cta coral">Join the pre-drinks</div>
+      </div>
+    </div><div class="scap">3 · Event room + the pint</div></div>
+
+    <!-- 4. GROUPS -->
+    <div class="phone"><div class="screen">
+      <div class="topbar emerald"><div class="row"><div><div class="kick">Browse & join</div><h4>Groups</h4></div><span style="font-size:12px;font-weight:700;background:#fff;color:var(--emerald);padding:8px 13px;border-radius:100px">+ Add a group</span></div></div>
+      <div class="body">
+        <div class="grp"><span class="gi" style="background:var(--emerald-t)">🥾</span><div><div class="gn">Howth & Wicklow hikes</div><div class="gs">Sun mornings · 12 in</div></div><span class="open">open</span></div>
+        <div class="grp"><span class="gi" style="background:var(--pink-t)">🍷</span><div><div class="gn">Wine, casually</div><div class="gs">Monthly · 8 in</div></div><span class="open">open</span></div>
+        <div class="grp"><span class="gi" style="background:var(--yellow-t)">🎲</span><div><div class="gn">Board game nights</div><div class="gs">Tuesdays · 10 in</div></div><span class="open">open</span></div>
+        <div class="grp"><span class="gi" style="background:var(--blue-t)">🎓</span><div><div class="gn">UCD · Sept intake</div><div class="gs">312 in · students only</div></div><span class="lock">verify</span></div>
+        <div class="grp"><span class="gi" style="background:var(--blue-t)">🎓</span><div><div class="gn">Trinity · Sept intake</div><div class="gs">287 in · students only</div></div><span class="lock">verify</span></div>
+      </div>
+      <nav class="nav">
+        <a><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>Tonight</a>
+        <a class="on tGroups"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="9" r="3"/><circle cx="16" cy="11" r="2.4"/><path d="M4 20c0-3 2.5-5 5-5s5 2 5 5M14 20c0-2.2 1.5-3.6 3.5-3.6S21 18 21 20"/></svg>Groups</a>
+        <a><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5l1.8 3.7L18 9.3l-3 2.9.7 4.1L12 14.5 8.3 16.3 9 12.2l-3-2.9 4.2-.6z"/></svg>Meet</a>
+        <a><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.5-6 8-6s8 2 8 6"/></svg>You</a>
+      </nav>
+    </div><div class="scap">4 · Groups — open vs. verify</div></div>
+
+    <!-- 5. JUST-IN-TIME VERIFY -->
+    <div class="phone"><div class="screen sheetscreen">
+      <div class="topbar emerald" style="opacity:.5"><div class="kick">Browse & join</div><h4>Groups</h4></div>
+      <div class="dim"></div>
+      <div class="sheet">
+        <div class="grab"></div>
+        <div class="lg">🎓</div>
+        <h4>Joining UCD · Sept intake</h4>
+        <p>This one's students only. Verify once and you get a badge others in the group can see.</p>
+        <div class="field">Student email &nbsp; <b>aoife.n@ucd.ie</b></div>
+        <div class="cta blue">Send me a code</div>
+        <div class="cta ghost" style="margin:0">Upload student ID instead</div>
+      </div>
+    </div><div class="scap">5 · Verify only when you need to</div></div>
+
+    <!-- 6. MEET -->
+    <div class="phone"><div class="screen">
+      <div class="topbar violet"><div class="kick">Not alone</div><h4>Meet</h4></div>
+      <div class="body">
+        <div class="meetcard d"><h5>You + a mate → another pair</h5><p>Line up a double. Nobody arrives on their own.</p>
+          <div class="avstack" style="margin-top:12px"><span class="av a">You</span><span class="av c">+1</span><span class="av" style="background:rgba(255,255,255,.35);margin-left:2px">?</span><span class="av" style="background:rgba(255,255,255,.35)">?</span></div>
+        </div>
+        <div class="meetcard c"><h5>You two → other couples</h5><p>Find couples for hikes, dinners, weekends away.</p></div>
+        <div class="cta ghost" style="margin-top:14px">How doubles stay safe</div>
+      </div>
+      <nav class="nav">
+        <a><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>Tonight</a>
+        <a><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="9" r="3"/><circle cx="16" cy="11" r="2.4"/><path d="M4 20c0-3 2.5-5 5-5s5 2 5 5M14 20c0-2.2 1.5-3.6 3.5-3.6S21 18 21 20"/></svg>Groups</a>
+        <a class="on tMeet"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5l1.8 3.7L18 9.3l-3 2.9.7 4.1L12 14.5 8.3 16.3 9 12.2l-3-2.9 4.2-.6z"/></svg>Meet</a>
+        <a><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.5-6 8-6s8 2 8 6"/></svg>You</a>
+      </nav>
+    </div><div class="scap">6 · Meet — doubles & couples</div></div>
+
+    <!-- 7. PROFILE -->
+    <div class="phone"><div class="screen">
+      <div class="profhero">
+        <div class="big">A</div>
+        <h4>Aoife, 21</h4>
+        <div class="loc">In Dublin since Sept 2026</div>
+        <div class="pbadges">
+          <span class="pb blue"><span class="t">✓</span> UCD student</span>
+          <span class="pb yellow"><span class="t">✓</span> New to Dublin</span>
+          <span class="pb emerald"><span class="t">✓</span> ID verified</span>
+        </div>
+      </div>
+      <div class="body">
+        <div class="rel">
+          <div style="display:flex;justify-content:space-between;font-size:12.5px;font-weight:700"><span>Reliability</span><span style="color:var(--emerald)">Reliable</span></div>
+          <div class="bar"><i></i></div>
+          <div style="font-size:11px;color:var(--ink-soft);margin-top:7px">Showed up to 9 of the last 10 plans</div>
+        </div>
+        <div style="font-size:12px;font-weight:700;margin-top:14px">Into</div>
+        <div class="pills"><span class="pill c">Indie gigs</span><span class="pill e">Howth hikes</span><span class="pill v">Board games</span></div>
+      </div>
+      <nav class="nav">
+        <a><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>Tonight</a>
+        <a><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="9" r="3"/><circle cx="16" cy="11" r="2.4"/><path d="M4 20c0-3 2.5-5 5-5s5 2 5 5M14 20c0-2.2 1.5-3.6 3.5-3.6S21 18 21 20"/></svg>Groups</a>
+        <a><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5l1.8 3.7L18 9.3l-3 2.9.7 4.1L12 14.5 8.3 16.3 9 12.2l-3-2.9 4.2-.6z"/></svg>Meet</a>
+        <a class="on tYou"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.5-6 8-6s8 2 8 6"/></svg>You</a>
+      </nav>
+    </div><div class="scap">7 · You — badges you carry</div></div>
+
+  </div>
+</div>
+
+<!-- ==================== ROADMAP ==================== -->
+<section>
+  <div class="wrap">
+    <p class="eyebrow coral">What to build first</p>
+    <h2>Don't build all of it. Build the wedge.</h2>
+    <div class="steps">
+      <div class="step"><div class="sn">1</div><div><h3>One city, one scene</h3><p>Indie/rock gigs at the mid-size rooms. Ticketmaster search only. Solo-seeks-companion plus a small pre-gig room. Nothing else yet.</p></div></div>
+      <div class="step"><div class="sn">2</div><div><h3>Seed it by hand</h3><p>Go to those gigs, get people on, and time the first real push to the September intake so the app is busy from day one.</p></div></div>
+      <div class="step"><div class="sn">3</div><div><h3>Switch on cohorts</h3><p>Open the UCD / Trinity / TU Dublin and New-to-Dublin groups with per-group verification. Acquisition engine on.</p></div></div>
+      <div class="step"><div class="sn">4</div><div><h3>Layer the groups</h3><p>Once there's density and trust, open recurring interest groups, doubles and couples on a base that already works.</p></div></div>
+    </div>
+    <p class="sub" style="margin-top:22px;font-size:15px">Plumbing: Ticketmaster's Discovery API is public and dominant in Ireland — your spine. Eventbrite killed public event search in 2019, so let users paste those links manually instead.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow violet">The name</p>
+    <h2>tandem</h2>
+    <p class="sub" style="margin-top:6px">Two people moving together — nobody pedalling alone. It carries the doubles-and-pairs idea in one word, and scales past Dublin if you ever want it to.</p>
+    <div class="names" style="margin-top:14px">
+      <span class="name pick">tandem</span>
+    </div>
+    <p class="sub" style="margin-top:14px;font-size:14px">Before committing: check the App Store, a domain, and a basic trademark search — short real words are harder to own than coined ones.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">Concept & wireframes · Dublin-first social app · working title <b style="color:var(--ink)">tandem</b><br>Open to everyone; some groups have a doorkeeper. A starting point to edit and share, not a finished spec.</div>
+</footer>
+
+</body>
+</html>

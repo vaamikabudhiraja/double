@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>tandem — how people talk</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FFFBF4;--ink:#1B1430;--ink-soft:rgba(27,20,48,0.60);--line:rgba(27,20,48,0.10);--card:#fff;
+    --coral:#FF5A4D;--emerald:#12B886;--violet:#7A5CFF;--blue:#3B78E7;--yellow:#FFC23C;--pink:#FF4D97;
+    --coral-t:#FFEDEB;--emerald-t:#E4F7F0;--violet-t:#EFEBFF;--blue-t:#E7F0FE;--yellow-t:#FFF3D6;--grey-t:#F1EEE7;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:'Instrument Sans',system-ui,sans-serif;font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1100px;margin:0 auto;padding:0 24px}
+  h1,h4{font-family:'Bricolage Grotesque',sans-serif;margin:0;line-height:1.05}
+  header{padding:60px 0 8px}
+  .mark{font-family:'Bricolage Grotesque';font-weight:800;font-size:20px;display:inline-flex;align-items:center;gap:9px}
+  .mark .dot{width:12px;height:12px;border-radius:50%;background:conic-gradient(var(--coral),var(--yellow),var(--emerald),var(--violet),var(--coral))}
+  header h1{font-weight:800;font-size:clamp(32px,5vw,50px);letter-spacing:-0.03em;margin:20px 0 0;max-width:15ch}
+  header p{color:var(--ink-soft);max-width:58ch;font-size:19px;margin:16px 0 0}
+
+  .gallery{display:flex;flex-wrap:wrap;gap:40px 26px;justify-content:center;margin:46px 0 20px}
+  .phone{width:282px;flex:0 0 auto}
+  .screen{background:var(--card);border-radius:34px;overflow:hidden;position:relative;border:1px solid var(--line);
+    box-shadow:0 26px 60px -20px rgba(27,20,48,.35);height:588px;display:flex;flex-direction:column;font-size:13px}
+  .cap{padding:12px 15px;color:#fff;display:flex;align-items:center;gap:10px}
+  .cap.emerald{background:var(--emerald)} .cap.coral{background:var(--coral)} .cap.ink{background:var(--ink)}
+  .cap .bk{font-size:16px;opacity:.9}
+  .cap .ti{font-family:'Bricolage Grotesque';font-weight:800;font-size:16px;line-height:1.1}
+  .cap .su{font-size:10.5px;opacity:.9}
+  .cap .vt{margin-left:auto;font-size:10px;font-weight:700;background:rgba(255,255,255,.22);padding:3px 8px;border-radius:100px}
+
+  .pinned{margin:10px 12px 4px;border-radius:15px;padding:12px;border:1px dashed var(--line);background:var(--grey-t)}
+  .pinned.plan{background:var(--emerald-t);border-color:transparent}
+  .pinned.pint{background:var(--yellow-t);border-color:transparent}
+  .pinned .pl{font-size:10px;font-weight:700;color:var(--ink-soft);display:flex;align-items:center;gap:5px}
+  .pinned .pt{font-family:'Bricolage Grotesque';font-weight:800;font-size:15px;margin:4px 0 2px}
+  .pinned .ps{font-size:11px;color:var(--ink-soft)}
+  .rsvp{display:flex;gap:6px;margin-top:9px}
+  .rsvp span{font-size:11px;font-weight:700;border-radius:100px;padding:6px 12px}
+  .rsvp .yes{background:var(--emerald);color:#fff} .rsvp .no{background:#fff;color:var(--ink-soft);border:1px solid var(--line)}
+
+  .thread{flex:1;overflow:hidden;padding:8px 12px;display:flex;flex-direction:column;gap:9px}
+  .msg{max-width:78%}
+  .msg .who{font-size:10px;font-weight:700;color:var(--ink-soft);margin:0 0 3px 3px;display:flex;align-items:center;gap:4px}
+  .tick{width:12px;height:12px;border-radius:50%;background:var(--blue);color:#fff;font-size:8px;font-weight:800;display:inline-flex;align-items:center;justify-content:center}
+  .tick.e{background:var(--emerald)} .tick.y{background:var(--yellow);color:#5a3d00}
+  .bub{background:var(--grey-t);border-radius:15px;border-top-left-radius:5px;padding:9px 12px;font-size:12.5px;line-height:1.4}
+  .me{align-self:flex-end}
+  .me .bub{background:var(--emerald);color:#fff;border-radius:15px;border-top-right-radius:5px}
+  .me.coral .bub{background:var(--coral)}
+  .sys{align-self:center;font-size:10.5px;color:var(--ink-soft);background:var(--grey-t);padding:5px 12px;border-radius:100px;text-align:center;max-width:88%}
+
+  .inbar{display:flex;align-items:center;gap:9px;padding:11px 12px;border-top:1px solid var(--line)}
+  .inbar .f{flex:1;background:var(--grey-t);border-radius:100px;padding:10px 14px;font-size:12px;color:var(--ink-soft)}
+  .inbar .snd{width:34px;height:34px;border-radius:50%;color:#fff;display:flex;align-items:center;justify-content:center;font-size:15px;flex:0 0 auto}
+  .snd.emerald{background:var(--emerald)} .snd.coral{background:var(--coral)}
+
+  /* DM request screen */
+  .reqbanner{margin:12px;border:1px solid var(--line);border-radius:16px;padding:16px;text-align:center}
+  .reqbanner .ph{width:52px;height:52px;border-radius:50%;background:var(--violet);color:#fff;font-family:'Bricolage Grotesque';font-weight:800;font-size:22px;display:flex;align-items:center;justify-content:center;margin:0 auto 10px}
+  .reqbanner h4{font-size:17px}
+  .reqbanner .ctx{font-size:11.5px;color:var(--ink-soft);margin-top:4px}
+  .reqbanner .badges{display:flex;gap:6px;justify-content:center;margin-top:9px;flex-wrap:wrap}
+  .rb{font-size:10px;font-weight:700;border-radius:100px;padding:4px 9px;display:inline-flex;gap:4px;align-items:center}
+  .rb.blue{background:var(--blue-t);color:#26508f} .rb.e{background:var(--emerald-t);color:#0b6b4f}
+  .reqbtns{display:flex;gap:8px;margin:14px 12px 4px}
+  .reqbtns span{flex:1;text-align:center;font-weight:700;font-size:13px;border-radius:12px;padding:11px}
+  .reqbtns .acc{background:var(--violet);color:#fff} .reqbtns .ig{background:var(--grey-t);color:var(--ink-soft)}
+  .safe{display:flex;justify-content:center;gap:16px;padding:12px;color:var(--ink-soft);font-size:11px;font-weight:600}
+  .safe span{display:flex;align-items:center;gap:5px}
+  .locknote{margin:8px 12px;background:var(--blue-t);border-radius:12px;padding:10px 12px;display:flex;gap:9px}
+  .locknote .i{color:var(--blue);font-weight:800}
+  .locknote p{font-size:11px;color:#26508f;margin:0;line-height:1.4}
+
+  .scap{font-family:'Bricolage Grotesque';font-weight:700;text-align:center;color:var(--ink-soft);font-size:12.5px;margin-top:14px}
+  footer{padding:30px 0 64px;color:var(--ink-soft);font-size:14px;border-top:1px solid var(--line);margin-top:20px}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="mark"><span class="dot"></span>tandem</div>
+    <h1>Three ways to talk — each pointed at meeting up.</h1>
+    <p>Groups chat around a plan so they don't go dead. Event rooms close after the night. And nobody can message a stranger cold — first contact is always a request.</p>
+  </div>
+</header>
+
+<div class="wrap gallery">
+
+  <!-- GROUP CHAT -->
+  <div class="phone"><div class="screen">
+    <div class="cap emerald"><span class="bk">‹</span><div><div class="ti">Howth &amp; Wicklow hikes</div><div class="su">12 members · open group</div></div><span class="vt">🛡 hosted</span></div>
+    <div class="pinned plan">
+      <div class="pl">📌 Next plan</div>
+      <div class="pt">Sunday hike · Ticknock</div>
+      <div class="ps">10:00am · coffee after · 7 going</div>
+      <div class="rsvp"><span class="yes">I'm in</span><span class="no">Can't make it</span></div>
+    </div>
+    <div class="thread">
+      <div class="msg"><div class="who"><span class="tick e">✓</span> Cormac · host</div><div class="bub">Trail's a bit muddy after the rain — bring proper boots 🥾</div></div>
+      <div class="msg"><div class="who"><span class="tick y">✓</span> Diarmuid</div><div class="bub">First time out with ye — how long's the loop?</div></div>
+      <div class="msg me"><div class="bub">About 2 hours, dead easy. See ye at the car park!</div></div>
+      <div class="sys">Aoife and 2 others said they're in</div>
+    </div>
+    <div class="inbar"><div class="f">Message the group…</div><div class="snd emerald">➤</div></div>
+  </div><div class="scap">1 · Group chat, built around the next plan</div></div>
+
+  <!-- EVENT ROOM -->
+  <div class="phone"><div class="screen">
+    <div class="cap coral"><span class="bk">‹</span><div><div class="ti">Sprints · Whelan's</div><div class="su">You + 13 going</div></div><span class="vt">closes after tonight</span></div>
+    <div class="pinned pint">
+      <div class="pl">🍺 Before the gig</div>
+      <div class="pt">Pint at The Lower Deck</div>
+      <div class="ps">7:00pm · 5 going · 4 min walk</div>
+      <div class="rsvp"><span class="yes" style="background:var(--coral)">Join</span><span class="no">Meet you inside</span></div>
+    </div>
+    <div class="thread">
+      <div class="sys">This room disappears after the show</div>
+      <div class="msg"><div class="who"><span class="tick">✓</span> Méabh</div><div class="bub">Anyone near the front? Saving a bit of space 🙌</div></div>
+      <div class="msg"><div class="who"><span class="tick y">✓</span> Jack</div><div class="bub">Running 5 mins late, order me a pint?</div></div>
+      <div class="msg me coral"><div class="bub">On it 😄 we're by the window</div></div>
+    </div>
+    <div class="inbar"><div class="f">Message the room…</div><div class="snd coral">➤</div></div>
+  </div><div class="scap">2 · Event room — ephemeral, low-stakes</div></div>
+
+  <!-- DM REQUEST -->
+  <div class="phone"><div class="screen">
+    <div class="cap ink"><span class="bk">‹</span><div><div class="ti">Message request</div><div class="su">Not connected yet</div></div></div>
+    <div class="reqbanner">
+      <div class="ph">D</div>
+      <h4>Diarmuid, 24</h4>
+      <div class="ctx">You're both in Howth &amp; Wicklow hikes</div>
+      <div class="badges"><span class="rb blue"><span class="tick">✓</span>New to Dublin</span><span class="rb e"><span class="tick e">✓</span>ID verified</span></div>
+    </div>
+    <div class="thread" style="flex:0;padding-bottom:0">
+      <div class="msg"><div class="bub">Hey! Saw you're new here too — a few of us get food after the Sunday hike if you fancy it?</div></div>
+    </div>
+    <div class="reqbtns"><span class="acc">Accept &amp; reply</span><span class="ig">Ignore</span></div>
+    <div class="safe"><span>🚫 Block</span><span>⚑ Report</span><span>↩ Leave</span></div>
+    <div class="locknote"><span class="i">🔒</span><p>You can only be messaged by people from your groups, matches or events — never a stranger cold.</p></div>
+  </div><div class="scap">3 · DMs are gated — first contact is a request</div></div>
+
+</div>
+
+<footer><div class="wrap">Chat is a means to meeting, not the destination · group chats anchor to plans · event rooms dissolve · no cold DMs, ever.</div></footer>
+</body>
+</html>
