@@ -42,8 +42,10 @@ One city (Dublin), and only: gig feed (Ticketmaster) → event rooms → open in
 Supabase foundation landed: typed client (`src/lib/supabase.ts`), auth session
 provider (`src/providers/auth.tsx`), and the initial schema + RLS for profiles /
 groups / group_members / messages (`supabase/migrations/0001_init.sql`). App
-holds only the URL + anon key via `.env.local`. Next: a sign-in screen, then the
-Tonight gig feed via a Ticketmaster Edge Function.
+holds only the URL + anon key via `.env.local`. Email one-time-code sign-in
+lives in the You tab (`src/features/auth/email-sign-in.tsx`) — the app is not
+gated behind login (open-app principle). Next: the Tonight gig feed via a
+Ticketmaster Edge Function.
 
 <!-- Keep the Expo SDK reminder in scope too. -->
 @AGENTS.md

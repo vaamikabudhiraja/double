@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -7,8 +8,10 @@ type Props = {
   section: SectionKey;
   /** Small line above the big title, e.g. a date or a subtitle. */
   kicker: string;
-  /** Short line of body copy under the header. */
-  blurb: string;
+  /** Short line of body copy under the header. Optional when `children` are given. */
+  blurb?: string;
+  /** Screen content rendered under the header, on the warm background. */
+  children?: ReactNode;
 };
 
 /**
@@ -17,7 +20,7 @@ type Props = {
  * the `.topbar` blocks in design/tandem-app.html. Screen content goes in `blurb`
  * for now — real content lands feature by feature.
  */
-export function TandemScreen({ section, kicker, blurb }: Props) {
+export function TandemScreen({ section, kicker, blurb, children }: Props) {
   const s = Section[section];
   return (
     <View style={styles.root}>
@@ -33,7 +36,8 @@ export function TandemScreen({ section, kicker, blurb }: Props) {
       </SafeAreaView>
 
       <View style={styles.body}>
-        <Text style={styles.blurb}>{blurb}</Text>
+        {blurb ? <Text style={styles.blurb}>{blurb}</Text> : null}
+        {children}
       </View>
     </View>
   );
