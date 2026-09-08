@@ -29,14 +29,25 @@ export type OAuthResult = { ok: boolean; cancelled?: boolean };
 export async function signInWithGoogle(): Promise<OAuthResult> {
   const supabase = getSupabase();
 
+  // No `skipBrowserRedirect`: that appends `skip_http_redirect=true`, which turns
+  // the authorize URL into a JSON API call the Supabase gateway rejects for a
+  // missing apikey. Without it, opening the URL 302-redirects straight to Google.
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider: 'google',
-    options: { redirectTo: oauthRedirectTo, skipBrowserRedirect: true },
+    options: { redirectTo: oauthRedirectTo },
   });
   if (error) throw error;
   if (!data?.url) throw new Error('Could not start Google sign-in.');
 
-  const result = await WebBrowser.openAuthSessionAsync(data.url, oauthRedirectTo);
+  // The gateway requires the anon key on the authorize request; add it if the
+  // generated URL doesn't already carry it.
+  let authUrl = data.url;
+  const anonKey = process.env.EXPO_PUBLIC_SUPABASE_ANON_KEY;
+  if (anonKey && !/[?&]apikey=/.test(authUrl)) {
+    authUrl += `${authUrl.includes('?') ? '&' : '?'}apikey=${encodeURIComponent(anonKey)}`;
+  }
+
+  const result = await WebBrowser.openAuthSessionAsync(authUrl, oauthRedirectTo);
   if (result.type !== 'success') {
     return { ok: false, cancelled: true };
   }
