@@ -30,6 +30,35 @@ supabase link --project-ref <your-project-ref>
 supabase db push                 # applies everything in migrations/
 ```
 
+## Google sign-in (OAuth)
+
+Works in Expo Go via a browser flow. One-time setup:
+
+**Google Cloud** ([console.cloud.google.com](https://console.cloud.google.com)):
+1. Create/select a project → **APIs & Services → OAuth consent screen** → configure
+   (External, app name, your email).
+2. **APIs & Services → Credentials → Create credentials → OAuth client ID** →
+   application type **Web application**.
+3. Under **Authorized redirect URIs**, add your Supabase callback:
+   `https://<your-project-ref>.supabase.co/auth/v1/callback`
+4. Copy the **Client ID** and **Client secret**.
+
+**Supabase:**
+5. **Authentication → Sign In / Providers → Google** → enable, paste the Client ID
+   + secret, **Save**.
+6. **Authentication → URL Configuration → Redirect URLs** → add the app's redirect.
+   The app prints it on launch — look for `[oauth] Supabase redirect URL to allow:`
+   in the Metro terminal (an `exp://…/--/auth/callback` URL in Expo Go, or
+   `double://auth/callback` in a dev build). Add both if you have them.
+
+Then "Continue with Google" in the You tab opens the browser, you pick your
+Google account, and it returns you to the app signed in.
+
+## Apple sign-in
+
+Deferred: native Sign in with Apple needs a development build (not Expo Go) and
+an Apple Developer account. Revisit when moving to EAS builds / TestFlight.
+
 ## Run the policy tests
 
 Requires Docker (the CLI spins up a local Postgres):

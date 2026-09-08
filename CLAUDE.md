@@ -45,9 +45,10 @@ groups / group_members / messages (`supabase/migrations/0001_init.sql`). App
 holds only the URL + anon key via `.env.local`. Email + password sign-in lives
 in the You tab (`src/features/auth/email-sign-in.tsx`) — the app is not gated
 behind login (open-app principle). Password rather than OTP because the free
-tier locks email templates behind custom SMTP; revisit passwordless once a real
-email provider is wired up. Next: the Tonight gig feed via a Ticketmaster Edge
-Function.
+tier locks email templates behind custom SMTP. Google sign-in via browser OAuth
+(PKCE) also works in Expo Go (`src/features/auth/oauth.ts`); Apple deferred until
+a dev build + Apple Developer account. Next: the Tonight gig feed via a
+Ticketmaster Edge Function.
 
 <!-- Keep the Expo SDK reminder in scope too. -->
 @AGENTS.md

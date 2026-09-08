@@ -69,6 +69,8 @@ function initSupabase(): SupabaseClient<Database> | null {
         persistSession: true,
         // No URL-based session handoff on native.
         detectSessionInUrl: false,
+        // PKCE is the secure OAuth flow for mobile (Google sign-in via browser).
+        flowType: 'pkce',
       },
     });
   } catch (error) {

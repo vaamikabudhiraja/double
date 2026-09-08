@@ -1,3 +1,4 @@
+import { FontAwesome } from '@expo/vector-icons';
 import { useState } from 'react';
 import {
   ActivityIndicator,
@@ -10,6 +11,7 @@ import {
 
 import { FontFamily, Palette, Section } from '@/constants/theme';
 import { getSupabase } from '@/lib/supabase';
+import { signInWithGoogle } from './oauth';
 
 const BLUE = Section.you.color;
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -30,8 +32,26 @@ export function EmailSignIn() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [busy, setBusy] = useState(false);
+  const [googleBusy, setGoogleBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [notice, setNotice] = useState<string | null>(null);
+
+  async function handleGoogle() {
+    setError(null);
+    setNotice(null);
+    setGoogleBusy(true);
+    try {
+      const result = await signInWithGoogle();
+      // On success the AuthProvider swaps this screen out; a cancel is a no-op.
+      if (!result.ok && !result.cancelled) {
+        setError('Google sign-in did not complete.');
+      }
+    } catch (e) {
+      setError(e instanceof Error ? e.message : 'Google sign-in failed.');
+    } finally {
+      setGoogleBusy(false);
+    }
+  }
 
   async function submit() {
     const cleanEmail = email.trim().toLowerCase();
@@ -94,6 +114,29 @@ export function EmailSignIn() {
         Sign in to join groups, host, and message people from your groups. Browsing
         is open — you only need this to take part.
       </Text>
+
+      <Pressable
+        onPress={handleGoogle}
+        disabled={busy || googleBusy}
+        style={({ pressed }) => [
+          styles.google,
+          (busy || googleBusy || pressed) && styles.googlePressed,
+        ]}>
+        {googleBusy ? (
+          <ActivityIndicator color={Palette.ink} />
+        ) : (
+          <>
+            <FontAwesome name="google" size={17} color={Palette.ink} />
+            <Text style={styles.googleText}>Continue with Google</Text>
+          </>
+        )}
+      </Pressable>
+
+      <View style={styles.divider}>
+        <View style={styles.dividerLine} />
+        <Text style={styles.dividerText}>or use email</Text>
+        <View style={styles.dividerLine} />
+      </View>
 
       {isSignup ? (
         <>
@@ -185,6 +228,36 @@ const styles = StyleSheet.create({
     fontSize: 14,
     lineHeight: 20,
     marginBottom: 16,
+  },
+  google: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 10,
+    borderWidth: 1.5,
+    borderColor: Palette.line,
+    borderRadius: 14,
+    paddingVertical: 14,
+    minHeight: 50,
+    backgroundColor: Palette.card,
+  },
+  googlePressed: { opacity: 0.85 },
+  googleText: {
+    fontFamily: FontFamily.bodySemiBold,
+    color: Palette.ink,
+    fontSize: 15,
+  },
+  divider: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 12,
+    marginVertical: 18,
+  },
+  dividerLine: { flex: 1, height: 1, backgroundColor: Palette.line },
+  dividerText: {
+    fontFamily: FontFamily.bodyMedium,
+    color: Palette.inkSoft,
+    fontSize: 12,
   },
   label: {
     fontFamily: FontFamily.bodySemiBold,
