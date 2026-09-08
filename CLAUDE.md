@@ -39,7 +39,11 @@ One city (Dublin), and only: gig feed (Ticketmaster) → event rooms → open in
 
 ## Current focus
 <!-- Update this each session, e.g. "Building the groups list screen + join flow." -->
-Project scaffold and Supabase schema.
+Supabase foundation landed: typed client (`src/lib/supabase.ts`), auth session
+provider (`src/providers/auth.tsx`), and the initial schema + RLS for profiles /
+groups / group_members / messages (`supabase/migrations/0001_init.sql`). App
+holds only the URL + anon key via `.env.local`. Next: a sign-in screen, then the
+Tonight gig feed via a Ticketmaster Edge Function.
 
 <!-- Keep the Expo SDK reminder in scope too. -->
 @AGENTS.md

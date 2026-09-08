@@ -14,6 +14,7 @@ import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 
 import { FontFamily, Palette, Section } from '@/constants/theme';
+import { AuthProvider } from '@/providers/auth';
 
 // Keep the native splash up until the fonts are ready, so there's no flash of a
 // fallback font on first paint.
@@ -41,57 +42,62 @@ export default function RootLayout() {
   }
 
   return (
-    <Tabs
-      screenOptions={{
-        headerShown: false,
-        tabBarInactiveTintColor: Palette.inkSoft,
-        tabBarStyle: {
-          backgroundColor: Palette.card,
-          borderTopColor: Palette.line,
-        },
-        tabBarLabelStyle: { fontFamily: FontFamily.bodySemiBold, fontSize: 11 },
-      }}>
-      {/* Each tab keeps its own section colour when active (per the wireframes). */}
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: Section.tonight.label,
-          tabBarActiveTintColor: Section.tonight.color,
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="musical-notes" size={size} color={color} />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="groups"
-        options={{
-          title: Section.groups.label,
-          tabBarActiveTintColor: Section.groups.color,
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="people" size={size} color={color} />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="meet"
-        options={{
-          title: Section.meet.label,
-          tabBarActiveTintColor: Section.meet.color,
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="sparkles" size={size} color={color} />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="you"
-        options={{
-          title: Section.you.label,
-          tabBarActiveTintColor: Section.you.color,
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="person" size={size} color={color} />
-          ),
-        }}
-      />
-    </Tabs>
+    <AuthProvider>
+      <Tabs
+        screenOptions={{
+          headerShown: false,
+          tabBarInactiveTintColor: Palette.inkSoft,
+          tabBarStyle: {
+            backgroundColor: Palette.card,
+            borderTopColor: Palette.line,
+          },
+          tabBarLabelStyle: {
+            fontFamily: FontFamily.bodySemiBold,
+            fontSize: 11,
+          },
+        }}>
+        {/* Each tab keeps its own section colour when active (per the wireframes). */}
+        <Tabs.Screen
+          name="index"
+          options={{
+            title: Section.tonight.label,
+            tabBarActiveTintColor: Section.tonight.color,
+            tabBarIcon: ({ color, size }) => (
+              <Ionicons name="musical-notes" size={size} color={color} />
+            ),
+          }}
+        />
+        <Tabs.Screen
+          name="groups"
+          options={{
+            title: Section.groups.label,
+            tabBarActiveTintColor: Section.groups.color,
+            tabBarIcon: ({ color, size }) => (
+              <Ionicons name="people" size={size} color={color} />
+            ),
+          }}
+        />
+        <Tabs.Screen
+          name="meet"
+          options={{
+            title: Section.meet.label,
+            tabBarActiveTintColor: Section.meet.color,
+            tabBarIcon: ({ color, size }) => (
+              <Ionicons name="sparkles" size={size} color={color} />
+            ),
+          }}
+        />
+        <Tabs.Screen
+          name="you"
+          options={{
+            title: Section.you.label,
+            tabBarActiveTintColor: Section.you.color,
+            tabBarIcon: ({ color, size }) => (
+              <Ionicons name="person" size={size} color={color} />
+            ),
+          }}
+        />
+      </Tabs>
+    </AuthProvider>
   );
 }
