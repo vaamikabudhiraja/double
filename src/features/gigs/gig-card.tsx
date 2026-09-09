@@ -25,14 +25,21 @@ function formatWhen(startsAt: string | null): string | null {
   return `${day} · ${time}`;
 }
 
-export function GigCard({ gig, highlighted }: { gig: Gig; highlighted?: boolean }) {
+export function GigCard({
+  gig,
+  highlighted,
+  onOpen,
+}: {
+  gig: Gig;
+  highlighted?: boolean;
+  onOpen: () => void;
+}) {
   const when = formatWhen(gig.startsAt);
   const subtitle = [gig.venue, when].filter(Boolean).join(' · ');
 
   return (
     <Pressable
-      disabled={!gig.url}
-      onPress={() => gig.url && Linking.openURL(gig.url)}
+      onPress={onOpen}
       style={({ pressed }) => [
         styles.card,
         highlighted && styles.hot,
@@ -42,7 +49,14 @@ export function GigCard({ gig, highlighted }: { gig: Gig; highlighted?: boolean 
         {gig.name}
       </Text>
       {subtitle ? <Text style={styles.meta}>{subtitle}</Text> : null}
-      {gig.url ? <Text style={styles.link}>View tickets ›</Text> : null}
+      <View style={styles.footer}>
+        <Text style={styles.cta}>Tap to open the room ›</Text>
+        {gig.url ? (
+          <Pressable onPress={() => Linking.openURL(gig.url!)} hitSlop={8}>
+            <Text style={styles.link}>Tickets</Text>
+          </Pressable>
+        ) : null}
+      </View>
     </Pressable>
   );
 }
@@ -70,10 +84,20 @@ const styles = StyleSheet.create({
     fontSize: 12.5,
     marginTop: 3,
   },
-  link: {
+  footer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginTop: 9,
+  },
+  cta: {
     fontFamily: FontFamily.bodySemiBold,
     color: Palette.coral,
     fontSize: 12,
-    marginTop: 9,
+  },
+  link: {
+    fontFamily: FontFamily.bodyMedium,
+    color: Palette.inkSoft,
+    fontSize: 12,
   },
 });

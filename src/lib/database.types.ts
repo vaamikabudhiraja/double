@@ -232,6 +232,98 @@ export interface Database {
           },
         ];
       };
+      event_rooms: {
+        Row: {
+          id: string;
+          created_at: string;
+          ticketmaster_id: string;
+          name: string;
+          venue: string | null;
+          starts_at: string | null;
+          url: string | null;
+          going_count: number;
+        };
+        Insert: {
+          id?: string;
+          created_at?: string;
+          ticketmaster_id: string;
+          name: string;
+          venue?: string | null;
+          starts_at?: string | null;
+          url?: string | null;
+          going_count?: number;
+        };
+        Update: {
+          id?: string;
+          created_at?: string;
+          ticketmaster_id?: string;
+          name?: string;
+          venue?: string | null;
+          starts_at?: string | null;
+          url?: string | null;
+          going_count?: number;
+        };
+        Relationships: [];
+      };
+      event_attendees: {
+        Row: {
+          event_id: string;
+          user_id: string;
+          pint: boolean;
+          created_at: string;
+        };
+        Insert: {
+          event_id: string;
+          user_id: string;
+          pint?: boolean;
+          created_at?: string;
+        };
+        Update: {
+          event_id?: string;
+          user_id?: string;
+          pint?: boolean;
+          created_at?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'event_attendees_event_id_fkey';
+            columns: ['event_id'];
+            referencedRelation: 'event_rooms';
+            referencedColumns: ['id'];
+          },
+        ];
+      };
+      event_messages: {
+        Row: {
+          id: string;
+          created_at: string;
+          event_id: string;
+          sender_id: string;
+          body: string;
+        };
+        Insert: {
+          id?: string;
+          created_at?: string;
+          event_id: string;
+          sender_id: string;
+          body: string;
+        };
+        Update: {
+          id?: string;
+          created_at?: string;
+          event_id?: string;
+          sender_id?: string;
+          body?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'event_messages_event_id_fkey';
+            columns: ['event_id'];
+            referencedRelation: 'event_rooms';
+            referencedColumns: ['id'];
+          },
+        ];
+      };
     };
     Views: Record<string, never>;
     Functions: {
@@ -242,6 +334,10 @@ export interface Database {
       plan_group_id: {
         Args: { pid: string };
         Returns: string;
+      };
+      is_event_attendee: {
+        Args: { eid: string; uid: string };
+        Returns: boolean;
       };
     };
     Enums: Record<string, never>;

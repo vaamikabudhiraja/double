@@ -62,7 +62,14 @@ realtime on messages), non-members get a join gate. Group chats now anchor to a
 "next plan" (`src/features/plans/`, migration `0003_plans.sql`): a pinned plan
 card with RSVP (I'm in / can't make it + going count) atop the chat, and a
 "set the next plan" sheet (uses @react-native-community/datetimepicker@9.1.0,
-Expo-pinned). Next: event rooms (tap a gig → its ephemeral room + pre-gig pint).
+Expo-pinned). Event rooms built (`src/features/events/`, migration
+`0004_events.sql`): tap a gig on Tonight → a full-screen room (going count,
+pre-gig pint toggle, attendee names, realtime chat that "closes after the show"),
+created lazily on first "I'm going". Chat thread UI extracted to
+`src/features/chat/chat-thread.tsx` and shared by group + event chat. This
+completes the core MVP loop (gigs → rooms → groups → chat → plans). Next
+(post-MVP): Meet/doubles, student verification, cohort groups, push, auto-close
+past event rooms.
 
 <!-- Keep the Expo SDK reminder in scope too. -->
 @AGENTS.md
