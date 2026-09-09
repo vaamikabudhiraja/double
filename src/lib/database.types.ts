@@ -324,6 +324,30 @@ export interface Database {
           },
         ];
       };
+      pairs: {
+        Row: {
+          id: string;
+          created_at: string;
+          requester_id: string;
+          partner_id: string;
+          status: 'pending' | 'confirmed';
+        };
+        Insert: {
+          id?: string;
+          created_at?: string;
+          requester_id: string;
+          partner_id: string;
+          status?: 'pending' | 'confirmed';
+        };
+        Update: {
+          id?: string;
+          created_at?: string;
+          requester_id?: string;
+          partner_id?: string;
+          status?: 'pending' | 'confirmed';
+        };
+        Relationships: [];
+      };
       blocks: {
         Row: { blocker_id: string; blocked_id: string; created_at: string };
         Insert: { blocker_id: string; blocked_id: string; created_at?: string };

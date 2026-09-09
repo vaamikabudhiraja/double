@@ -70,8 +70,13 @@ created lazily on first "I'm going". Chat thread UI extracted to
 completes the core MVP loop (gigs → rooms → groups → chat → plans). Safety
 built (`src/features/safety/`, migration `0005_safety.sql`): long-press any
 message → Block / Report; blocked senders are filtered from every chat (group +
-event). Deferred features remain deferred until the MVP is live: Meet/doubles,
-student verification, cohort groups, push notifications, auto-close past rooms.
+event). Meet/doubles STARTED (beyond MVP, at user's explicit request): step 1
+"lock in your +1" built (`src/features/meet/`, migration `0006_pairs.sql`) — the
+Meet tab lets you search users, send a pair request, and confirm/decline/unpair
+(RLS: partner-only confirm, either side removes). Still to build for doubles:
+suggested pairs, pair-to-pair mutual match, four-person plan room. Still
+deferred: student verification, cohort groups, push notifications, auto-close
+past rooms.
 
 <!-- Keep the Expo SDK reminder in scope too. -->
 @AGENTS.md
