@@ -47,7 +47,23 @@ export async function signInWithGoogle(): Promise<OAuthResult> {
     authUrl += `${authUrl.includes('?') ? '&' : '?'}apikey=${encodeURIComponent(anonKey)}`;
   }
 
+  if (__DEV__) {
+    console.log('[oauth] anonKey present:', Boolean(anonKey));
+    console.log(
+      '[oauth] opening:',
+      anonKey ? authUrl.split(anonKey).join('<APIKEY>') : authUrl,
+    );
+  }
+
   const result = await WebBrowser.openAuthSessionAsync(authUrl, oauthRedirectTo);
+
+  if (__DEV__) {
+    console.log(
+      '[oauth] result:',
+      result.type,
+      'url' in result ? result.url : '(no url)',
+    );
+  }
   if (result.type !== 'success') {
     return { ok: false, cancelled: true };
   }
