@@ -55,8 +55,11 @@ name, bio, "new to Dublin" in the You tab (`src/features/profile/`) against the
 profiles table + RLS. Groups tab built (`src/features/groups/`): browse/create/
 join open groups with member counts (migration `0002_groups.sql` adds member_count
 + host-auto-membership triggers + public group read). Student-only groups show a
-"verify" pill and block join (verification deferred). Next: event rooms (tap a
-gig → its room + chat) and realtime group chat.
+"verify" pill and block join (verification deferred). Realtime group chat built
+(`src/features/chat/`): the Groups tab is now a stack (`app/groups/index.tsx`
+list + `app/groups/[id].tsx` chat); members see a live message thread (Supabase
+realtime on messages), non-members get a join gate. Next: anchor group chats to
+a "next plan", and event rooms (tap a gig → its room).
 
 <!-- Keep the Expo SDK reminder in scope too. -->
 @AGENTS.md

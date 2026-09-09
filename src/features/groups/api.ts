@@ -14,6 +14,32 @@ export async function listGroups(): Promise<Group[]> {
   return data ?? [];
 }
 
+/** A single group by id (discovery is public). */
+export async function getGroup(groupId: string): Promise<Group | null> {
+  const { data, error } = await getSupabase()
+    .from('groups')
+    .select(COLUMNS)
+    .eq('id', groupId)
+    .maybeSingle();
+  if (error) throw error;
+  return data;
+}
+
+/** Whether the user is a member of the group. */
+export async function isMember(
+  groupId: string,
+  userId: string,
+): Promise<boolean> {
+  const { data, error } = await getSupabase()
+    .from('group_members')
+    .select('user_id')
+    .eq('group_id', groupId)
+    .eq('user_id', userId)
+    .maybeSingle();
+  if (error) throw error;
+  return !!data;
+}
+
 /** The group ids the current user belongs to (RLS scopes this to the caller). */
 export async function listMyGroupIds(userId: string): Promise<string[]> {
   const { data, error } = await getSupabase()

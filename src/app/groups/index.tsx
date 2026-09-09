@@ -1,3 +1,4 @@
+import { useRouter } from 'expo-router';
 import { useState } from 'react';
 import {
   ActivityIndicator,
@@ -20,6 +21,7 @@ import { isSupabaseConfigured } from '@/lib/supabase';
 const EMERALD = Section.groups.color;
 
 export default function GroupsScreen() {
+  const router = useRouter();
   const { user } = useAuth();
   const userId = user?.id;
   const { groups, loading, refreshing, error, reload } = useGroups(userId);
@@ -103,6 +105,7 @@ export default function GroupsScreen() {
               userId={userId}
               onChanged={reload}
               onNeedsAccount={reload}
+              onOpen={() => router.push(`/groups/${item.id}`)}
             />
           )}
           ListEmptyComponent={

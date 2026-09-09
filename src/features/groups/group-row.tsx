@@ -12,9 +12,16 @@ type Props = {
   userId: string | undefined;
   onChanged: () => void;
   onNeedsAccount: () => void;
+  onOpen: () => void;
 };
 
-export function GroupRow({ group, userId, onChanged, onNeedsAccount }: Props) {
+export function GroupRow({
+  group,
+  userId,
+  onChanged,
+  onNeedsAccount,
+  onOpen,
+}: Props) {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -49,18 +56,20 @@ export function GroupRow({ group, userId, onChanged, onNeedsAccount }: Props) {
   return (
     <View style={styles.wrap}>
       <View style={styles.row}>
-        <View style={styles.icon}>
-          <Text style={styles.iconEmoji}>{categoryEmoji(group.category)}</Text>
-        </View>
-        <View style={styles.body}>
-          <Text style={styles.name} numberOfLines={1}>
-            {group.name}
-          </Text>
-          <Text style={styles.meta} numberOfLines={1}>
-            {categoryLabel(group.category)} · {group.member_count} in
-            {isStudentsOnly ? ' · students only' : ''}
-          </Text>
-        </View>
+        <Pressable style={styles.tap} onPress={onOpen}>
+          <View style={styles.icon}>
+            <Text style={styles.iconEmoji}>{categoryEmoji(group.category)}</Text>
+          </View>
+          <View style={styles.body}>
+            <Text style={styles.name} numberOfLines={1}>
+              {group.name}
+            </Text>
+            <Text style={styles.meta} numberOfLines={1}>
+              {categoryLabel(group.category)} · {group.member_count} in
+              {isStudentsOnly ? ' · students only' : ''}
+            </Text>
+          </View>
+        </Pressable>
 
         {group.isHost ? (
           <View style={[styles.pill, styles.hostPill]}>
@@ -104,6 +113,7 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
   },
   row: { flexDirection: 'row', alignItems: 'center', gap: 12 },
+  tap: { flexDirection: 'row', alignItems: 'center', gap: 12, flex: 1 },
   icon: {
     width: 40,
     height: 40,
