@@ -18,8 +18,9 @@ URL + anon key.
 
 ## Apply the schema
 
-**Easiest (dashboard):** open the SQL editor in your Supabase project, paste the
-contents of `migrations/0001_init.sql`, and run it.
+**Easiest (dashboard):** open the SQL editor in your Supabase project and run
+each file in `migrations/` in order — `0001_init.sql`, then `0002_groups.sql`
+(paste the contents and Run). Run new migration files the same way as they're added.
 
 **Or with the CLI:**
 

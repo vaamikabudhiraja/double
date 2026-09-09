@@ -52,7 +52,11 @@ Function proxies Ticketmaster (`supabase/functions/gigs/`), client feed in
 `src/features/gigs/` renders coral gig cards on the Tonight tab. Needs the
 function deployed + TICKETMASTER_API_KEY secret. Basic profiles built: view/edit
 name, bio, "new to Dublin" in the You tab (`src/features/profile/`) against the
-profiles table + RLS. Next: event rooms + open interest groups (Groups tab).
+profiles table + RLS. Groups tab built (`src/features/groups/`): browse/create/
+join open groups with member counts (migration `0002_groups.sql` adds member_count
++ host-auto-membership triggers + public group read). Student-only groups show a
+"verify" pill and block join (verification deferred). Next: event rooms (tap a
+gig → its room + chat) and realtime group chat.
 
 <!-- Keep the Expo SDK reminder in scope too. -->
 @AGENTS.md

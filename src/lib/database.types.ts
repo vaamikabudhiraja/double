@@ -62,6 +62,7 @@ export interface Database {
           category: string;
           description: string | null;
           join_policy: JoinPolicy;
+          member_count: number;
         };
         Insert: {
           id?: string;
@@ -71,6 +72,7 @@ export interface Database {
           category: string;
           description?: string | null;
           join_policy?: JoinPolicy;
+          member_count?: number;
         };
         Update: {
           id?: string;
@@ -80,6 +82,7 @@ export interface Database {
           category?: string;
           description?: string | null;
           join_policy?: JoinPolicy;
+          member_count?: number;
         };
         Relationships: [
           {
