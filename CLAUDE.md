@@ -50,8 +50,9 @@ tier locks email templates behind custom SMTP. Google sign-in via browser OAuth
 a dev build + Apple Developer account. Tonight gig feed built: `gigs` Edge
 Function proxies Ticketmaster (`supabase/functions/gigs/`), client feed in
 `src/features/gigs/` renders coral gig cards on the Tonight tab. Needs the
-function deployed + TICKETMASTER_API_KEY secret. Next: event rooms + open
-interest groups.
+function deployed + TICKETMASTER_API_KEY secret. Basic profiles built: view/edit
+name, bio, "new to Dublin" in the You tab (`src/features/profile/`) against the
+profiles table + RLS. Next: event rooms + open interest groups (Groups tab).
 
 <!-- Keep the Expo SDK reminder in scope too. -->
 @AGENTS.md
