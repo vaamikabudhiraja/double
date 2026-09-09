@@ -47,8 +47,11 @@ in the You tab (`src/features/auth/email-sign-in.tsx`) — the app is not gated
 behind login (open-app principle). Password rather than OTP because the free
 tier locks email templates behind custom SMTP. Google sign-in via browser OAuth
 (PKCE) also works in Expo Go (`src/features/auth/oauth.ts`); Apple deferred until
-a dev build + Apple Developer account. Next: the Tonight gig feed via a
-Ticketmaster Edge Function.
+a dev build + Apple Developer account. Tonight gig feed built: `gigs` Edge
+Function proxies Ticketmaster (`supabase/functions/gigs/`), client feed in
+`src/features/gigs/` renders coral gig cards on the Tonight tab. Needs the
+function deployed + TICKETMASTER_API_KEY secret. Next: event rooms + open
+interest groups.
 
 <!-- Keep the Expo SDK reminder in scope too. -->
 @AGENTS.md

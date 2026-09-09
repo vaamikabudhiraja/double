@@ -59,6 +59,27 @@ Google account, and it returns you to the app signed in.
 Deferred: native Sign in with Apple needs a development build (not Expo Go) and
 an Apple Developer account. Revisit when moving to EAS builds / TestFlight.
 
+## Tonight gig feed (Edge Function)
+
+The `gigs` function (`functions/gigs/`) proxies the Ticketmaster Discovery API so
+the key stays server-side. To make the Tonight tab load real gigs:
+
+1. **Get a free Ticketmaster key:** [developer.ticketmaster.com](https://developer.ticketmaster.com)
+   → register an app → copy the **Consumer Key**.
+2. **Store it as a function secret** (never in the app):
+   ```bash
+   supabase secrets set TICKETMASTER_API_KEY=your-consumer-key
+   ```
+3. **Deploy the function** (public, since browsing gigs needs no login):
+   ```bash
+   supabase functions deploy gigs --no-verify-jwt
+   ```
+
+Test the normalization logic locally with:
+```bash
+deno test supabase/functions/gigs/
+```
+
 ## Run the policy tests
 
 Requires Docker (the CLI spins up a local Postgres):
