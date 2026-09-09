@@ -13,6 +13,9 @@ import { FontFamily, Palette, Section } from '@/constants/theme';
 import { GroupChat } from '@/features/chat/group-chat';
 import { getGroup, isMember, joinGroup } from '@/features/groups/api';
 import type { Group } from '@/features/groups/types';
+import { PlanCard } from '@/features/plans/plan-card';
+import { SetPlan } from '@/features/plans/set-plan';
+import { usePlan } from '@/features/plans/use-plan';
 import { useAuth } from '@/providers/auth';
 
 const EMERALD = Section.groups.color;
@@ -123,14 +126,80 @@ export default function GroupChatScreen() {
           ) : null}
         </View>
       ) : (
-        <GroupChat groupId={groupId} userId={user.id} userName={userName} />
+        <MemberView groupId={groupId} userId={user.id} userName={userName} />
       )}
+    </View>
+  );
+}
+
+function MemberView({
+  groupId,
+  userId,
+  userName,
+}: {
+  groupId: string;
+  userId: string;
+  userName: string;
+}) {
+  const { plan, loading: planLoading, rsvp, reload } = usePlan(groupId, userId);
+  const [showSetPlan, setShowSetPlan] = useState(false);
+
+  return (
+    <View style={styles.flex}>
+      {planLoading ? null : plan ? (
+        <View>
+          <PlanCard plan={plan} onRsvp={rsvp} />
+          <Pressable onPress={() => setShowSetPlan(true)} style={styles.changePlan}>
+            <Text style={styles.changePlanText}>Change plan</Text>
+          </Pressable>
+        </View>
+      ) : (
+        <Pressable onPress={() => setShowSetPlan(true)} style={styles.setPlan}>
+          <Text style={styles.setPlanText}>＋ Set the next plan</Text>
+        </Pressable>
+      )}
+
+      <GroupChat groupId={groupId} userId={userId} userName={userName} />
+
+      <SetPlan
+        visible={showSetPlan}
+        groupId={groupId}
+        userId={userId}
+        onCreated={() => {
+          setShowSetPlan(false);
+          reload();
+        }}
+        onCancel={() => setShowSetPlan(false)}
+      />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   root: { flex: 1, backgroundColor: Palette.bg },
+  flex: { flex: 1 },
+  setPlan: {
+    marginHorizontal: 12,
+    marginTop: 12,
+    marginBottom: 4,
+    borderWidth: 1.5,
+    borderColor: Palette.line,
+    borderStyle: 'dashed',
+    borderRadius: 15,
+    paddingVertical: 13,
+    alignItems: 'center',
+  },
+  setPlanText: {
+    fontFamily: FontFamily.bodySemiBold,
+    color: Section.groups.color,
+    fontSize: 13,
+  },
+  changePlan: { alignSelf: 'flex-end', paddingHorizontal: 16, paddingVertical: 6 },
+  changePlanText: {
+    fontFamily: FontFamily.bodyMedium,
+    color: Palette.inkSoft,
+    fontSize: 12,
+  },
   headerSafe: { backgroundColor: EMERALD },
   header: {
     flexDirection: 'row',

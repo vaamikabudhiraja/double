@@ -58,8 +58,11 @@ join open groups with member counts (migration `0002_groups.sql` adds member_cou
 "verify" pill and block join (verification deferred). Realtime group chat built
 (`src/features/chat/`): the Groups tab is now a stack (`app/groups/index.tsx`
 list + `app/groups/[id].tsx` chat); members see a live message thread (Supabase
-realtime on messages), non-members get a join gate. Next: anchor group chats to
-a "next plan", and event rooms (tap a gig → its room).
+realtime on messages), non-members get a join gate. Group chats now anchor to a
+"next plan" (`src/features/plans/`, migration `0003_plans.sql`): a pinned plan
+card with RSVP (I'm in / can't make it + going count) atop the chat, and a
+"set the next plan" sheet (uses @react-native-community/datetimepicker@9.1.0,
+Expo-pinned). Next: event rooms (tap a gig → its ephemeral room + pre-gig pint).
 
 <!-- Keep the Expo SDK reminder in scope too. -->
 @AGENTS.md

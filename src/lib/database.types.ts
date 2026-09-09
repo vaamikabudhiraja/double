@@ -164,12 +164,84 @@ export interface Database {
           },
         ];
       };
+      plans: {
+        Row: {
+          id: string;
+          created_at: string;
+          group_id: string;
+          created_by: string;
+          title: string;
+          details: string | null;
+          location: string | null;
+          starts_at: string;
+        };
+        Insert: {
+          id?: string;
+          created_at?: string;
+          group_id: string;
+          created_by: string;
+          title: string;
+          details?: string | null;
+          location?: string | null;
+          starts_at: string;
+        };
+        Update: {
+          id?: string;
+          created_at?: string;
+          group_id?: string;
+          created_by?: string;
+          title?: string;
+          details?: string | null;
+          location?: string | null;
+          starts_at?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'plans_group_id_fkey';
+            columns: ['group_id'];
+            referencedRelation: 'groups';
+            referencedColumns: ['id'];
+          },
+        ];
+      };
+      plan_rsvps: {
+        Row: {
+          plan_id: string;
+          user_id: string;
+          status: 'in' | 'out';
+          created_at: string;
+        };
+        Insert: {
+          plan_id: string;
+          user_id: string;
+          status?: 'in' | 'out';
+          created_at?: string;
+        };
+        Update: {
+          plan_id?: string;
+          user_id?: string;
+          status?: 'in' | 'out';
+          created_at?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'plan_rsvps_plan_id_fkey';
+            columns: ['plan_id'];
+            referencedRelation: 'plans';
+            referencedColumns: ['id'];
+          },
+        ];
+      };
     };
     Views: Record<string, never>;
     Functions: {
       is_group_member: {
         Args: { gid: string; uid: string };
         Returns: boolean;
+      };
+      plan_group_id: {
+        Args: { pid: string };
+        Returns: string;
       };
     };
     Enums: Record<string, never>;
