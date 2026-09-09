@@ -61,8 +61,19 @@ function initSupabase(): SupabaseClient<Database> | null {
     return null;
   }
 
+  // Normalise to just the origin (scheme + host). Supabase's own URLs carry no
+  // path, and pasting one with a trailing path like `/rest/v1` would send auth
+  // calls to `/rest/v1/auth/v1/...` and fail with "No API key found in request".
+  const baseUrl = new URL(url).origin;
+  if (__DEV__ && baseUrl !== url.replace(/\/+$/, '')) {
+    console.warn(
+      `[supabase] Trimmed EXPO_PUBLIC_SUPABASE_URL to its origin: ${baseUrl}\n` +
+        'Set it to just https://<your-project-ref>.supabase.co (no trailing path).',
+    );
+  }
+
   try {
-    return createClient<Database>(url, anonKey, {
+    return createClient<Database>(baseUrl, anonKey, {
       auth: {
         storage: AsyncStorage,
         autoRefreshToken: true,
