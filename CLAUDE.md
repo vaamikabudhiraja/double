@@ -67,9 +67,11 @@ Expo-pinned). Event rooms built (`src/features/events/`, migration
 pre-gig pint toggle, attendee names, realtime chat that "closes after the show"),
 created lazily on first "I'm going". Chat thread UI extracted to
 `src/features/chat/chat-thread.tsx` and shared by group + event chat. This
-completes the core MVP loop (gigs → rooms → groups → chat → plans). Next
-(post-MVP): Meet/doubles, student verification, cohort groups, push, auto-close
-past event rooms.
+completes the core MVP loop (gigs → rooms → groups → chat → plans). Safety
+built (`src/features/safety/`, migration `0005_safety.sql`): long-press any
+message → Block / Report; blocked senders are filtered from every chat (group +
+event). Deferred features remain deferred until the MVP is live: Meet/doubles,
+student verification, cohort groups, push notifications, auto-close past rooms.
 
 <!-- Keep the Expo SDK reminder in scope too. -->
 @AGENTS.md

@@ -324,6 +324,39 @@ export interface Database {
           },
         ];
       };
+      blocks: {
+        Row: { blocker_id: string; blocked_id: string; created_at: string };
+        Insert: { blocker_id: string; blocked_id: string; created_at?: string };
+        Update: { blocker_id?: string; blocked_id?: string; created_at?: string };
+        Relationships: [];
+      };
+      user_reports: {
+        Row: {
+          id: string;
+          created_at: string;
+          reporter_id: string;
+          reported_id: string;
+          context: string | null;
+          reason: string | null;
+        };
+        Insert: {
+          id?: string;
+          created_at?: string;
+          reporter_id: string;
+          reported_id: string;
+          context?: string | null;
+          reason?: string | null;
+        };
+        Update: {
+          id?: string;
+          created_at?: string;
+          reporter_id?: string;
+          reported_id?: string;
+          context?: string | null;
+          reason?: string | null;
+        };
+        Relationships: [];
+      };
     };
     Views: Record<string, never>;
     Functions: {

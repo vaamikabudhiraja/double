@@ -23,6 +23,10 @@ type Props = {
   onSend: (body: string) => Promise<void>;
   /** Optional system line pinned at the top of the thread (e.g. ephemeral note). */
   systemNote?: string;
+  /** Sender ids whose messages should be hidden (blocked). */
+  blockedIds?: Set<string>;
+  /** Long-press on someone else's message (offer block/report). */
+  onLongPressMessage?: (message: ChatMessage) => void;
 };
 
 /** Presentational chat: message bubbles + an input bar. Data comes from props. */
@@ -34,10 +38,15 @@ export function ChatThread({
   accent,
   onSend,
   systemNote,
+  blockedIds,
+  onLongPressMessage,
 }: Props) {
   const [text, setText] = useState('');
   const [sending, setSending] = useState(false);
   const listRef = useRef<FlatList<ChatMessage>>(null);
+  const visible = blockedIds
+    ? messages.filter((m) => !blockedIds.has(m.senderId))
+    : messages;
 
   async function handleSend() {
     const body = text.trim();
@@ -69,7 +78,7 @@ export function ChatThread({
       ) : (
         <FlatList
           ref={listRef}
-          data={messages}
+          data={visible}
           keyExtractor={(m) => m.id}
           contentContainerStyle={styles.list}
           showsVerticalScrollIndicator={false}
@@ -84,6 +93,9 @@ export function ChatThread({
               message={item}
               mine={item.senderId === currentUserId}
               accent={accent}
+              onLongPress={
+                onLongPressMessage ? () => onLongPressMessage(item) : undefined
+              }
             />
           )}
           ListEmptyComponent={
@@ -121,14 +133,19 @@ function Bubble({
   message,
   mine,
   accent,
+  onLongPress,
 }: {
   message: ChatMessage;
   mine: boolean;
   accent: string;
+  onLongPress?: () => void;
 }) {
   return (
     <View style={[styles.bubbleRow, mine ? styles.rowMine : styles.rowOther]}>
-      <View style={styles.bubbleWrap}>
+      <Pressable
+        style={styles.bubbleWrap}
+        onLongPress={mine ? undefined : onLongPress}
+        delayLongPress={350}>
         {!mine ? <Text style={styles.who}>{message.senderName}</Text> : null}
         <View
           style={[
@@ -141,7 +158,7 @@ function Bubble({
             {message.body}
           </Text>
         </View>
-      </View>
+      </Pressable>
     </View>
   );
 }

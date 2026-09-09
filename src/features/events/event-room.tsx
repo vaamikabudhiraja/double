@@ -11,6 +11,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { ChatThread } from '@/features/chat/chat-thread';
 import { FontFamily, Palette, Section } from '@/constants/theme';
 import type { Gig } from '@/features/gigs/types';
+import { useMessageActions } from '@/features/safety/use-message-actions';
 import { useEventChat } from './use-event-chat';
 import { useEventRoom } from './use-event-room';
 
@@ -161,6 +162,10 @@ function EventChat({
   userName: string;
 }) {
   const { messages, loading, error, send } = useEventChat(eventId, userId, userName);
+  const { blockedIds, onLongPressMessage } = useMessageActions(
+    userId,
+    `event:${eventId}`,
+  );
   return (
     <ChatThread
       messages={messages}
@@ -170,6 +175,8 @@ function EventChat({
       accent={CORAL}
       onSend={send}
       systemNote="This room closes after the show"
+      blockedIds={blockedIds}
+      onLongPressMessage={onLongPressMessage}
     />
   );
 }
